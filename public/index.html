@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>将棋オンライン</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <h1>♟ 将棋オンライン</h1>
+
+    <!-- マッチング画面 -->
+    <div id="matchScreen">
+      <button id="findMatchBtn" onclick="findMatch()">対戦相手を探す</button>
+      <p id="matchStatus"></p>
+    </div>
+
+    <!-- ゲーム画面 -->
+    <div id="gameScreen" style="display:none">
+      <div id="gameInfo">
+        <span id="turnInfo">先手の番</span>
+        <span id="myColor"></span>
+      </div>
+
+      <!-- 後手の持ち駒 -->
+      <div id="goteHand" class="hand-area">
+        <span class="hand-label">後手の持ち駒：</span>
+        <span id="goteHandPieces"></span>
+      </div>
+
+      <!-- 将棋盤 -->
+      <div id="board"></div>
+
+      <!-- 先手の持ち駒 -->
+      <div id="senteHand" class="hand-area">
+        <span class="hand-label">先手の持ち駒：</span>
+        <span id="senteHandPieces"></span>
+      </div>
+
+      <!-- 成り確認ダイアログ -->
+      <div id="promoteDialog" style="display:none">
+        <div id="promoteBox">
+          <p>成りますか？</p>
+          <button onclick="confirmPromote(true)">成る</button>
+          <button onclick="confirmPromote(false)">成らない</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

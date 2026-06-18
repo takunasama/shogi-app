@@ -1,0 +1,152 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
+  background: #2c1810;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+#app { text-align: center; width: 100%; max-width: 520px; }
+
+h1 { font-size: 1.8em; margin-bottom: 20px; color: #f5d080; }
+
+/* マッチング画面 */
+#findMatchBtn {
+  background: #c8a020;
+  color: #2c1810;
+  border: none;
+  padding: 14px 40px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#findMatchBtn:hover { background: #f5d080; }
+#matchStatus { margin-top: 14px; font-size: 1.1em; color: #f5d080; }
+
+/* ゲーム情報 */
+#gameInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+}
+#turnInfo { font-size: 1.1em; font-weight: bold; color: #f5d080; }
+#myColor { font-size: 0.9em; color: #ccc; }
+
+/* 将棋盤 */
+#board {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  border: 3px solid #8b6914;
+  background: #deb887;
+  width: 100%;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.cell {
+  border: 1px solid #8b6914;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  aspect-ratio: 1;
+  font-size: clamp(10px, 2.5vw, 22px);
+  transition: background 0.15s;
+}
+.cell:hover { background: rgba(255,200,0,0.3); }
+.cell.selected { background: rgba(100,200,255,0.5) !important; }
+.cell.movable { background: rgba(100,255,100,0.35); }
+.cell.last-move { background: rgba(255,220,50,0.4); }
+
+/* 駒 */
+.piece {
+  width: 90%;
+  height: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border-radius: 4px;
+  user-select: none;
+  line-height: 1;
+}
+.piece.sente {
+  color: #1a0a00;
+  background: #f5e6c0;
+  border: 1px solid #8b5e1a;
+}
+.piece.gote {
+  color: #cc0000;
+  background: #f5e6c0;
+  border: 1px solid #cc0000;
+  transform: rotate(180deg);
+}
+.piece.promoted { color: #cc0000; }
+.piece.sente.promoted { color: #cc0000; }
+
+/* 持ち駒 */
+.hand-area {
+  padding: 8px 10px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 6px;
+  margin: 6px 0;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-size: 0.9em;
+}
+.hand-label { color: #ccc; margin-right: 6px; }
+.hand-piece {
+  background: #f5e6c0;
+  color: #1a0a00;
+  border: 1px solid #8b5e1a;
+  padding: 3px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+.hand-piece:hover { background: #ffe080; }
+.hand-piece.selected-drop { background: #80e0ff; }
+
+/* 成りダイアログ */
+#promoteDialog {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 100;
+}
+#promoteBox {
+  background: #f5e6c0;
+  color: #1a0a00;
+  padding: 30px 40px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.2em;
+}
+#promoteBox p { margin-bottom: 16px; font-weight: bold; }
+#promoteBox button {
+  margin: 0 8px;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+}
+#promoteBox button:first-of-type { background: #c8a020; color: #fff; }
+#promoteBox button:last-of-type { background: #888; color: #fff; }
